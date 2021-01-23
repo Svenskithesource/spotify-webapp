@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {% block title %}
+      {{ page_title|default:"Untitled Page" }}
+      {% endblock title %}
+    </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link href="{% static 'main.css' %}" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <script>
+      $(document).ready(function() {
+        var onScroll = function() {
+          var scrollTop = $(this).scrollTop();
+          $('.paralax-image').each(function(index, elem) {
+            var $elem = $(elem);
+            $elem.find('img').css('top', scrollTop - $elem.offset().top);
+          });
+        };
+        onScroll.apply(window);
+        $(window).on('scroll', onScroll);
+      });
+    </script>
+<!--    <div class="paralax-image"><img class="blurred" src="{{ song.image }}" /></div>-->
+
+    <div class="boxes">
+      <div class="box-1">
+        {% block box1 %}
+
+        {% endblock box1 %}
+      </div>
+      <div class="box-2">
+          {% block box2 %}
+
+          {% endblock box2 %}
+      </div>
+    </div>
+    <div class="viewport-wrapper"><div class="viewport"></div></div>
+  </body>
+</html>
